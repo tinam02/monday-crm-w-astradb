@@ -1,13 +1,176 @@
+html,
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  padding-left: 80px;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/*  NAV */
+nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  height: 100vh;
+  background-color: rgb(23, 22, 22);
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+nav .logo-container,
+nav .controls-container {
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#logo {
+  max-width: 100px;
+}
+nav .icon {
+  color: white;
+}
+
+/* DASHBOARD */
+.dashboard {
+  padding: 30px;
+  width: 100%;
+}
+
+.dashboard .tichet-container {
+  height: 80vh;
+  overflow: scroll;
+}
+
+/* Ticket Card */
+.ticket-card {
+  display: flex;
+  width: 100%;
+}
+.ticket-card #link {
+  text-decoration: none;
+  color: rgb(28, 28, 28);
+  display: flex;
+  width: 100%;
+}
+.ticket-card #link > * {
+  background-color: rgb(221, 221, 221);
+  margin: 2px;
+  padding: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ticket-card .ticket-color {
+  padding: 10px !important;
+  width: 15px !important;
+  margin: 2px;
+}
+
+.ticket-card .avatar-container {
+  display: flex;
+}
+.ticket-card .img-container {
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  overflow: hidden;
+}
+.ticket-card .img-container img {
+  width: 100%;
+}
+
+/* status */
+.ticket-card .status-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ticket-card .priority-display .star-container {
+  display: flex;
+  justify-content: center;
+}
+.ticket-card .priority-display .star-container h3 {
+  margin: 3px 6px;
+}
+/* progress */
+.ticket-card .progress-display {
+  min-width: 200px;
+}
+.ticket-card .progress-bar {
+  width: 100%;
+  height: 30px;
+  background-color: rgb(35, 35, 35);
+  border-radius: 30px;
+  overflow: hidden;
+}
+.ticket-card .progress-bar .progress-indicator {
+  background-color: rgb(112, 190, 79);
+  height: 100%;
+}
+/* del */
+.ticket-card .delete-block {
+  background-color: rgb(211, 211, 211);
+  width: 50px;
+  margin: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ticket-card .delete-block .delete-icon {
+  font-size: 20px;
+  border-radius: 20px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+/*  */
+/*  */
+/*  */
+/*  */
+/* TICKET PAGE */
+.ticket {
+  padding: 30px;
+  width: 100%;
+}
+.ticket .ticket-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.ticket form {
+  display: flex;
+}
+.ticket form section {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  width: 500px;
+}
+
+.ticket form label {
+  margin: 20px 0 0 0;
+}
+.ticket form select,
+.ticket form input {
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: 1px solid gray;
+  margin: 5px;
+}
+.ticket form .multiple-input-container {
+  display: flex;
+  margin: 20px 0 20px 0;
 }
