@@ -6,7 +6,6 @@ import PriorityDisplay from "./PriorityDisplay";
 import DeleteBlock from "./DeleteBlock";
 
 const TicketCard = ({ color, ticket }) => {
-  console.log(ticket.priority);
   return (
     <div className="ticket-card">
       <Link id={"link"} to={`/ticket/${ticket.documentId}`}>
@@ -18,7 +17,7 @@ const TicketCard = ({ color, ticket }) => {
         <PriorityDisplay priority={ticket.priority} />
         <ProgressDisplay progress={ticket.progress} />
       </Link>
-      <DeleteBlock />
+      <DeleteBlock documentId={ticket.documentId} />
     </div>
   );
 };

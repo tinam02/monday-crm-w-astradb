@@ -1,7 +1,7 @@
 import React from "react";
 
 const PriorityDisplay = ({ priority }) => {
-  console.log(priority);
+
   return (
     <div className="priority-display">
       <div className="star-container">

@@ -8,10 +8,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const url =
-  "https://6227584d-65bc-4880-a99a-95ad9dbfeea6-europe-west1.apps.astra.datastax.com/api/rest/v2/namespaces/tickets/collections/tasks";
-const token =
-  "AstraCS:nDDKQiOEHpUZvYkBJbZOXwqe:805b8a2dfc799db7c9159eb744be14bf13fe00352bd6a117477f216d336dab8a";
+const url = process.env.URL;
+const token = process.env.ASTRA_TOKEN;
 
 app.get("/tickets", async (req, res) => {
   const options = {
@@ -24,9 +22,26 @@ app.get("/tickets", async (req, res) => {
 
   try {
     const response = await axios(`${url}?page-size=20`, options);
-    res.status(200).json(response.data)
+    res.status(200).json(response.data);
   } catch (err) {
     console.log(err);
+    res.status(500).json({ message: err });
+  }
+});
+
+app.get("/tickets/:documentId", async (req, res) => {
+  const id = req.params.documentId;
+  const data = req.body.data;
+  const options = {
+    method: "GET",
+    headers: { Accepts: "application/json", "X-Cassandra-Token": token },
+    data,
+  };
+
+  try {
+    const response = await axios(`${url}/${id}`, options);
+    res.status(200).json(response.data);
+  } catch (err) {
     res.status(500).json({ message: err });
   }
 });
@@ -49,6 +64,38 @@ app.post("/tickets", async (req, res) => {
     res.status(200).json(response.data);
   } catch (err) {
     console.log(err);
+    res.status(500).json({ message: err });
+  }
+});
+
+app.put("/tickets/:documentId", async (req, res) => {
+  const id = req.params.documentId;
+  const data = req.body.data;
+  const options = {
+    method: "PUT",
+    headers: { Accepts: "application/json", "X-Cassandra-Token": token },
+    data,
+  };
+
+  try {
+    const response = await axios(`${url}/${id}`, options);
+    res.status(200).json(response.data);
+  } catch (err) {
+    res.status(500).json({ message: err });
+  }
+});
+
+app.delete("/tickets/:documentId", async (req, res) => {
+  const id = req.params.documentId;
+  const options = {
+    method: "DELETE",
+    headers: { Accepts: "application/json", "X-Cassandra-Token": token },
+  };
+
+  try {
+    const response = await axios(`${url}/${id}`, options);
+    res.status(200).json(response.data);
+  } catch (err) {
     res.status(500).json({ message: err });
   }
 });

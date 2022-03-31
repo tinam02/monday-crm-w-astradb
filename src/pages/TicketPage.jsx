@@ -1,18 +1,33 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import CategoriesContext from "../context";
 
-const TicketPage = () => {
+const TicketPage = ({ editMode }) => {
+  const { categories, setCategories } = useContext(CategoriesContext);
   const [formData, setFormData] = useState({
     title: "",
     status: "not started",
     progress: 0,
+    category: "Other",
     timestamp: new Date().toISOString(),
   });
+
   const navigate = useNavigate();
-  const editMode = false;
+  let { id } = useParams();
   const onSubmit = async (evt) => {
     evt.preventDefault();
+
+    if (editMode) {
+      const response = await axios.put(`http://localhost:8000/tickets/${id}`, {
+        data: formData,
+      });
+      const success = response.status === 200;
+      if (success) {
+        navigate("/");
+      }
+    }
+
     if (!editMode) {
       const response = await axios.post("http://localhost:8000/tickets", {
         formData,
@@ -23,14 +38,21 @@ const TicketPage = () => {
       }
     }
   };
+
+  const fetchData = async () => {
+    const response = await axios.get(`http://localhost:8000/tickets/${id}`);
+    setFormData(response.data.data);
+  };
+  useEffect(() => {
+    if (editMode) fetchData();
+  }, []);
+
   const onChange = (evt) => {
     const value = evt.target.value;
     const name = evt.target.name;
 
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
-
-  const categories = ["test1", "2"];
 
   return (
     <div className="ticket">
